@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: hostel-leave-management-system
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
