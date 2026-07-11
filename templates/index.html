@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Hostel Leave Management System{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="row align-items-center py-5">
+
+    <div class="col-lg-6">
+
+        <h1 class="display-4 fw-bold mb-3">
+            Hostel Leave Management System
+        </h1>
+
+        <p class="lead text-muted mb-4">
+            A modern web application that allows students to apply for hostel leave
+            online while enabling wardens and administrators to review, approve,
+            and manage leave requests efficiently.
+        </p>
+
+        {% if not session.get('student_id') and not session.get('admin') %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2">
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+        </a>
+        {% endif %}
+
+    </div>
+
+    <div class="col-lg-6 text-center">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+             class="img-fluid"
+             style="max-width:350px;">
+
+    </div>
+
+</div>
+
+<!-- Feature Cards -->
+
+<div class="row g-4 my-3">
+
+    <div class="col-md-4">
+
+        <div class="card h-100 text-center p-4">
+
+            <i class="bi bi-pencil-square display-4 text-primary mb-3"></i>
+
+            <h4>Easy Leave Application</h4>
+
+            <p class="text-muted">
+                Students can apply for hostel leave anytime through an easy online form.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card h-100 text-center p-4">
+
+            <i class="bi bi-clock-history display-4 text-success mb-3"></i>
+
+            <h4>Real-Time Tracking</h4>
+
+            <p class="text-muted">
+                Track pending, approved and rejected leave requests instantly.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card h-100 text-center p-4">
+
+            <i class="bi bi-shield-check display-4 text-danger mb-3"></i>
+
+            <h4>Secure Administration</h4>
+
+            <p class="text-muted">
+                Administrators can securely manage students and leave approvals.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Statistics -->
+
+<div class="row g-4 my-5">
+
+    <div class="col-md-3">
+
+        <div class="stats-card bg-blue text-center">
+
+            <h2>24×7</h2>
+
+            <p class="mb-0">Online Access</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="stats-card bg-green text-center">
+
+            <h2>100%</h2>
+
+            <p class="mb-0">Paperless Process</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="stats-card bg-orange text-center">
+
+            <h2>Fast</h2>
+
+            <p class="mb-0">Leave Approval</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="stats-card bg-red text-center">
+
+            <h2>Secure</h2>
+
+            <p class="mb-0">Student Records</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- About Section -->
+
+<div class="card shadow-sm p-5 my-5">
+
+    <h2 class="text-center mb-4">
+        About the Project
+    </h2>
+
+    <p class="text-muted text-center">
+
+        The Hostel Leave Management System is developed using
+        <strong>Python Flask</strong>,
+        <strong>SQLite</strong>,
+        <strong>HTML</strong>,
+        <strong>CSS</strong>,
+        and
+        <strong>Bootstrap 5</strong>.
+
+        It simplifies the leave approval process by replacing manual paperwork
+        with an efficient online workflow for students and hostel administrators.
+
+    </p>
+
+</div>
+
+<!-- Technologies -->
+
+<div class="my-5">
+
+    <h2 class="text-center mb-4">
+        Technologies Used
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-filetype-py display-4 text-primary"></i>
+            <h6 class="mt-2">Python</h6>
+        </div>
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-bootstrap display-4 text-purple"></i>
+            <h6 class="mt-2">Bootstrap</h6>
+        </div>
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-database display-4 text-success"></i>
+            <h6 class="mt-2">SQLite</h6>
+        </div>
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-filetype-html display-4 text-danger"></i>
+            <h6 class="mt-2">HTML5</h6>
+        </div>
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-filetype-css display-4 text-primary"></i>
+            <h6 class="mt-2">CSS3</h6>
+        </div>
+
+        <div class="col-md-2 col-6 text-center">
+            <i class="bi bi-server display-4 text-dark"></i>
+            <h6 class="mt-2">Flask</h6>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
