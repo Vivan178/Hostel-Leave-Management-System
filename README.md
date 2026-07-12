@@ -16,7 +16,7 @@
 
 [![Open Live Website](https://img.shields.io/badge/Open%20Live%20Website-Visit%20Now-success?style=for-the-badge&logo=render)](https://hostel-leave-management-system-w0nu.onrender.com)
 
-*A complete digital solution for managing hostel leave requests efficiently.*
+*A complete digital solution for managing hostel leave requests efficiently and securely.*
 
 </div>
 
