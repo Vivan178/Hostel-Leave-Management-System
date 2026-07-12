@@ -30,7 +30,7 @@ Instead of maintaining paper-based leave records, students can register, log in 
 
 The application provides student and warden modules, session-based authentication, leave-status tracking, notifications, profile management and downloadable PDF leave reports.
 
-The online application uses **PostgreSQL** for persistent data storage, while the local version can automatically use **SQLite**.
+The deployed application uses **PostgreSQL** for persistent data storage, while the local version automatically uses **SQLite**.
 
 ---
 
@@ -39,8 +39,8 @@ The online application uses **PostgreSQL** for persistent data storage, while th
 - Replace the traditional paper-based hostel leave process.
 - Allow students to submit and track leave requests online.
 - Provide wardens with a centralized leave-management dashboard.
-- Notify students when their requests are approved or rejected.
-- Store online application data persistently using PostgreSQL.
+- Notify students when requests are approved or rejected.
+- Store deployed application data persistently using PostgreSQL.
 - Provide a responsive and user-friendly interface.
 
 ---
@@ -50,7 +50,7 @@ The online application uses **PostgreSQL** for persistent data storage, while th
 ### 👨‍🎓 Student Module
 
 - Student registration
-- Student login
+- Secure student login
 - Personalized dashboard
 - Apply for hostel leave
 - View leave history
@@ -59,7 +59,7 @@ The online application uses **PostgreSQL** for persistent data storage, while th
 - View profile information
 - Change account password
 - Download PDF leave report
-- Logout securely
+- Secure logout
 
 ### 👮 Warden Module
 
@@ -71,7 +71,7 @@ The online application uses **PostgreSQL** for persistent data storage, while th
 - Reject leave requests
 - Automatically generate student notifications
 - Manage leave records
-- Warden logout
+- Secure warden logout
 
 ---
 
@@ -154,11 +154,9 @@ Hostel-Leave-Management-System/
 │   ├── notifications.png
 │   ├── profile.png
 │   ├── change_password.png
-│   ├── leave_report.png
 │   ├── warden_login.png
 │   ├── warden_dashboard.png
-│   ├── approved_leave.png
-│   └── rejected_leave.png
+│   └── approved_leave.png
 │
 ├── static/
 │   ├── css/
@@ -257,89 +255,77 @@ DATABASE_URL
 SECRET_KEY
 ```
 
-`DATABASE_URL` connects the web application to PostgreSQL, while `SECRET_KEY` is used to secure Flask sessions.
+`DATABASE_URL` connects the web application to PostgreSQL, while `SECRET_KEY` secures Flask sessions.
 
 > Database connection credentials must never be committed to GitHub.
 
 ---
 
-# 📸 Application Screenshots
+## 📸 Application Screenshots
 
-## 🏠 Home Page
+### 🏠 Home Page
 
 ![Hostel Leave Management System Home Page](screenshots/home.png)
 
 ---
 
-## 👤 Student Login
+### 👤 Student Login
 
 ![Student Login Page](screenshots/student_login.png)
 
 ---
 
-## 📝 Student Registration
+### 📝 Student Registration
 
 ![Student Registration Page](screenshots/student_register.png)
 
 ---
 
-## 📊 Student Dashboard
+### 📊 Student Dashboard
 
 ![Student Dashboard](screenshots/student_dashboard.png)
 
 ---
 
-## 🗓️ Apply for Leave
+### 🗓️ Apply for Leave
 
 ![Apply Leave Page](screenshots/apply_leave.png)
 
 ---
 
-## 🔔 Student Notifications
+### 🔔 Student Notifications
 
 ![Student Notifications Page](screenshots/notifications.png)
 
 ---
 
-## 👤 Student Profile
+### 👤 Student Profile
 
 ![Student Profile Page](screenshots/profile.png)
 
 ---
 
-## 🔑 Change Password
+### 🔑 Change Password
 
 ![Change Password Page](screenshots/change_password.png)
 
 ---
 
-## 📄 PDF Leave Report
-
-![PDF Leave Report](screenshots/leave_report.png)
-
----
-
-## 👮 Warden Login
+### 👮 Warden Login
 
 ![Warden Login Page](screenshots/warden_login.png)
 
 ---
 
-## 📋 Warden Dashboard
+### 📋 Warden Dashboard
 
 ![Warden Dashboard](screenshots/warden_dashboard.png)
 
 ---
 
-## ✅ Approved Leave Request
+### ✅ Approved Leave Request
 
 ![Approved Leave Request](screenshots/approved_leave.png)
-
----
-
-## ❌ Rejected Leave Request
-
-![Rejected Leave Request](screenshots/rejected_leave.png)
 
 ---
 
