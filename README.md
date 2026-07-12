@@ -1,61 +1,65 @@
+<div align="center">
+
 # 🏨 Hostel Leave Management System
 
-A modern **Hostel Leave Management System** developed using **Python Flask**, **SQLite**, **HTML**, **CSS**, and **Bootstrap**. This web application simplifies the hostel leave approval process by allowing students to apply for leave online while enabling wardens to review and manage requests through a dedicated dashboard.
+### A Modern Flask-Based Hostel Leave Management Web Application
+
+![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-3.1-black?logo=flask)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue?logo=sqlite)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?logo=bootstrap)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)
+![Render](https://img.shields.io/badge/Deployment-Render-46E3B7?logo=render)
+
+### 🌐 Live Demo
+
+### https://hostel-leave-management-system-w0nu.onrender.com
+
+*A complete digital solution for managing hostel leave requests efficiently.*
+
+</div>
 
 ---
 
-## 🌐 Live Demo
+# 📖 Project Overview
 
-**Website:** https://hostel-leave-management-system-w0nu.onrender.com
+The **Hostel Leave Management System** is a web-based application developed using **Python Flask** to simplify the hostel leave approval process.
 
----
+Instead of maintaining paper-based leave records, students can submit leave requests online while wardens can review, approve, or reject them through a secure dashboard.
 
-## 📌 Project Overview
-
-The Hostel Leave Management System replaces the traditional paper-based leave process with a secure and user-friendly digital platform.
-
-Students can:
-- Register and log in
-- Apply for hostel leave
-- Track leave status
-- View notifications
-- Download leave approval documents
-
-Wardens can:
-- Log in securely
-- View all leave applications
-- Approve or reject requests
-- Manage student leave records
+The system offers a modern user interface, secure authentication, QR Code generation, PDF Leave Slip generation, and an efficient workflow for managing hostel leave requests.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-### 👨‍🎓 Student Module
+## 👨‍🎓 Student Module
 
 - Student Registration
 - Secure Login
-- Dashboard
-- Apply Leave
+- Student Dashboard
+- Apply for Leave
 - View Leave History
 - Notifications
 - Profile Management
 - Change Password
 - QR Code Generation
-- PDF Leave Slip
-
-### 👮 Warden Module
-
-- Secure Login
-- Dashboard
-- View Leave Requests
-- Approve Leave
-- Reject Leave
-- Student Leave Management
+- PDF Leave Slip Download
 
 ---
 
-## 🛠 Technology Stack
+## 👮 Warden Module
+
+- Secure Login
+- Warden Dashboard
+- View Leave Applications
+- Approve Leave Requests
+- Reject Leave Requests
+- Manage Student Leave Records
+
+---
+
+# 🛠 Technology Stack
 
 ### Frontend
 
@@ -74,15 +78,15 @@ Wardens can:
 
 - SQLite
 
-### Libraries Used
+### Libraries
 
 - Flask
 - Flask-Login
 - Flask-WTF
 - SQLAlchemy
 - ReportLab
-- QRCode
 - Pillow
+- QRCode
 - python-dotenv
 
 ### Version Control
@@ -93,12 +97,27 @@ Wardens can:
 ### Deployment
 
 - Render
+
+---
+
+# 📊 Project Statistics
+
+| Category | Technology |
+|-----------|------------|
+| Framework | Flask |
+| Programming Language | Python |
+| Frontend | HTML, CSS, Bootstrap |
+| Database | SQLite |
+| Authentication | Flask Session |
+| Deployment | Render |
+| Version Control | Git & GitHub |
+
 ---
 
 # 📂 Project Structure
 
 ```text
-Hostel Leave Management System/
+Hostel Leave Management System
 │
 ├── app.py
 ├── hostel.db
@@ -106,17 +125,17 @@ Hostel Leave Management System/
 ├── render.yaml
 ├── README.md
 │
-├── static/
-│   ├── css/
-│   ├── images/
-│   └── qr_codes/
+├── static
+│   ├── css
+│   ├── images
+│   └── qr_codes
 │
-├── templates/
-│   ├── student/
-│   ├── admin/
+├── templates
+│   ├── student
+│   ├── admin
 │   └── home.html
 │
-└── reports/
+└── reports
 ```
 
 ---
@@ -129,7 +148,7 @@ Hostel Leave Management System/
 git clone https://github.com/Vivan178/Hostel-Leave-Management-System.git
 ```
 
-## Move into the Project
+## Open Project
 
 ```bash
 cd Hostel-Leave-Management-System
@@ -144,7 +163,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-### macOS/Linux
+### Linux / macOS
 
 ```bash
 python3 -m venv venv
@@ -157,13 +176,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Run the Application
+## Run the Project
 
 ```bash
 python app.py
 ```
 
-Open your browser:
+Open:
 
 ```
 http://127.0.0.1:5000
@@ -175,99 +194,87 @@ http://127.0.0.1:5000
 
 ## Student
 
-- Register Account
+- Register
 - Login
 - Apply Leave
-- Track Leave Status
-- View Notifications
+- View Leave Status
+- Receive Notifications
+- Download Leave PDF
 - Generate QR Code
-- Download PDF
-
----
 
 ## Warden
 
-- Secure Login
-- View Student Requests
+- Login
+- View Leave Requests
 - Approve Leave
 - Reject Leave
 - Manage Leave Records
+
 ---
 
 # 📸 Application Screenshots
 
-> *(Add screenshots of your application here after capturing them.)*
+> Add screenshots inside a folder named **screenshots**.
 
 | Home Page | Student Dashboard |
 |------------|-------------------|
-| ![Home](screenshots/home.png) | ![Dashboard](screenshots/dashboard.png) |
+| ![](screenshots/home.png) | ![](screenshots/student_dashboard.png) |
 
 | Apply Leave | Warden Dashboard |
 |--------------|------------------|
-| ![Apply Leave](screenshots/apply_leave.png) | ![Warden Dashboard](screenshots/warden_dashboard.png) |
+| ![](screenshots/apply_leave.png) | ![](screenshots/warden_dashboard.png) |
 
 ---
 
 # 🔒 Security Features
 
-- Secure user authentication
-- Session management
-- Protected dashboards
-- Separate Student and Warden access
-- SQLite database integration
-- Input validation using Flask-WTF
-
----
-
-# 🌟 Key Highlights
-
-- Responsive Bootstrap UI
-- Professional glassmorphism design
-- Student & Warden modules
-- Leave approval workflow
-- QR Code generation
-- PDF Leave Slip generation
-- Live deployment on Render
-- GitHub version control
-
----
-
-# 🚀 Future Enhancements
-
-- Email notifications
-- SMS alerts
-- Parent approval module
-- Multi-hostel support
-- Admin analytics dashboard
-- PostgreSQL integration
-- Cloud file storage
-- Mobile application
+- Secure Authentication
+- Session Management
+- Protected Routes
+- Separate Student & Warden Access
+- SQLite Database Integration
+- Form Validation
 
 ---
 
 # 🧪 Testing
 
-The application has been tested for:
+The application has been successfully tested for:
 
 - Student Registration
 - Student Login
 - Leave Application
 - Leave Approval
 - Leave Rejection
-- Notifications
+- Notification System
 - PDF Generation
 - QR Code Generation
-- Responsive Design
+- Responsive User Interface
 
 ---
 
-# 👨‍💻 Developed By
+# 🚀 Future Enhancements
+
+- Email Notifications
+- SMS Alerts
+- Parent Approval Module
+- Multi-Hostel Support
+- Analytics Dashboard
+- PostgreSQL Database
+- Cloud Storage Integration
+- Mobile Application
+
+---
+
+# 👨‍💻 Developer
 
 **Vivan Kumar**
 
-B.Tech CSE Student
+🎓 Bachelor of Computer Applications (Artificial Intelligence & Data Science)
 
-K.R. Mangalam University
+🏫 K.R. Mangalam University
+
+💻 Python • Flask • SQLite • HTML • CSS • Bootstrap
 
 ---
 
@@ -280,11 +287,22 @@ Special thanks to:
 - Bootstrap Team
 - SQLite Team
 - Render
+- GitHub
 
 ---
 
 # 📄 License
 
-This project is developed for educational purposes as part of the B.Tech Computer Science Engineering curriculum.
+This project was developed as an academic project for the **Bachelor of Computer Applications (Artificial Intelligence & Data Science)** program at **K.R. Mangalam University**.
 
 © 2026 Vivan Kumar. All Rights Reserved.
+
+---
+
+<div align="center">
+
+### ⭐ If you like this project, consider giving it a Star on GitHub!
+
+Made with ❤️ using Python Flask.
+
+</div>
