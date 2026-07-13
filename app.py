@@ -1321,7 +1321,110 @@ def api_warden_leaves():
         "success": True,
         "leaves": leave_requests
     })
-    
+@app.route("/api/warden/update_leave_status", methods=["POST"])
+def api_warden_update_leave_status():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    warden_id = data.get("warden_id")
+    leave_id = data.get("leave_id")
+    status = data.get("status", "").strip()
+
+    if not warden_id or not leave_id or not status:
+        return jsonify({
+            "success": False,
+            "message": "Warden ID, leave ID, and status are required."
+        }), 400
+
+    if status not in ["Approved", "Rejected"]:
+        return jsonify({
+            "success": False,
+            "message": "Invalid leave status."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM admins
+        WHERE id=?
+    """, (
+        warden_id,
+    ))
+
+    warden = cursor.fetchone()
+
+    if warden is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Warden account not found."
+        }), 404
+
+    cursor.execute("""
+        SELECT student_id, status
+        FROM leaves
+        WHERE id=?
+    """, (
+        leave_id,
+    ))
+
+    leave = cursor.fetchone()
+
+    if leave is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Leave request not found."
+        }), 404
+
+    student_id = leave[0]
+
+    cursor.execute("""
+        UPDATE leaves
+        SET status=?
+        WHERE id=?
+    """, (
+        status,
+        leave_id,
+    ))
+
+    if status == "Approved":
+        notification_message = (
+            "Your leave request has been approved by Warden ✅"
+        )
+    else:
+        notification_message = (
+            "Your leave request has been rejected by Warden ❌"
+        )
+
+    cursor.execute("""
+        INSERT INTO notifications
+        (student_id, message, status)
+        VALUES(?, ?, ?)
+    """, (
+        student_id,
+        notification_message,
+        "Unread"
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "success": True,
+        "message": f"Leave request {status.lower()} successfully."
+    })
+
 # ================= INITIALIZE DATABASE =================
 
 init_db()
