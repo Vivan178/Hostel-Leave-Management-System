@@ -831,6 +831,56 @@ def api_test():
         "message": "Hostel Leave Management API is working."
     })
 
+@app.route("/api/student/login", methods=["POST"])
+def api_student_login():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    email = data.get("email", "").strip()
+    password = data.get("password", "").strip()
+
+    if not email or not password:
+        return jsonify({
+            "success": False,
+            "message": "Email and password are required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, name, email
+        FROM students
+        WHERE email=?
+        AND password=?
+    """, (
+        email,
+        password
+    ))
+
+    student = cursor.fetchone()
+    conn.close()
+
+    if student:
+        return jsonify({
+            "success": True,
+            "student": {
+                "id": student[0],
+                "name": student[1],
+                "email": student[2]
+            }
+        })
+
+    return jsonify({
+        "success": False,
+        "message": "Invalid email or password."
+    }), 401
 
 # ================= INITIALIZE DATABASE =================
 
