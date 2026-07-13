@@ -1105,6 +1105,98 @@ def api_student_leave_history():
         "success": True,
         "leaves": leave_history
     })
+@app.route("/api/student/notifications", methods=["POST"])
+def api_student_notifications():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    student_id = data.get("student_id")
+
+    if not student_id:
+        return jsonify({
+            "success": False,
+            "message": "Student ID is required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM students
+        WHERE id=?
+    """, (
+        student_id,
+    ))
+
+    student = cursor.fetchone()
+
+    if student is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Student account not found."
+        }), 404
+
+    cursor.execute("""
+        SELECT id, reason, from_date, to_date, status
+        FROM leaves
+        WHERE student_id=?
+        ORDER BY id DESC
+    """, (
+        student_id,
+    ))
+
+    leaves = cursor.fetchall()
+    conn.close()
+
+    notifications = []
+
+    for leave in leaves:
+        leave_id = leave[0]
+        reason = leave[1]
+        from_date = leave[2]
+        to_date = leave[3]
+        status = leave[4]
+
+        if status == "Approved":
+            title = "Leave Request Approved"
+            message = (
+                f"Your leave request from {from_date} to "
+                f"{to_date} has been approved."
+            )
+        elif status == "Rejected":
+            title = "Leave Request Rejected"
+            message = (
+                f"Your leave request from {from_date} to "
+                f"{to_date} has been rejected."
+            )
+        else:
+            title = "Leave Request Pending"
+            message = (
+                f"Your leave request from {from_date} to "
+                f"{to_date} is waiting for approval."
+            )
+
+        notifications.append({
+            "id": leave_id,
+            "title": title,
+            "message": message,
+            "reason": reason,
+            "status": status
+        })
+
+    return jsonify({
+        "success": True,
+        "notifications": notifications
+    })
     
 # ================= INITIALIZE DATABASE =================
 
