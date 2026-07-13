@@ -953,6 +953,87 @@ def api_student_apply_leave():
             "success": False,
             "message": "Unable to submit leave request."
         }), 500
+@app.route("/api/student/dashboard", methods=["POST"])
+def api_student_dashboard():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    student_id = data.get("student_id")
+
+    if not student_id:
+        return jsonify({
+            "success": False,
+            "message": "Student ID is required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, name, email
+        FROM students
+        WHERE id=?
+    """, (
+        student_id,
+    ))
+
+    student = cursor.fetchone()
+
+    if student is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Student account not found."
+        }), 404
+
+    cursor.execute("""
+        SELECT status
+        FROM leaves
+        WHERE student_id=?
+    """, (
+        student_id,
+    ))
+
+    leaves = cursor.fetchall()
+    conn.close()
+
+    total = len(leaves)
+    pending = 0
+    approved = 0
+    rejected = 0
+
+    for leave in leaves:
+        status = leave[0]
+
+        if status == "Pending":
+            pending += 1
+        elif status == "Approved":
+            approved += 1
+        elif status == "Rejected":
+            rejected += 1
+
+    return jsonify({
+        "success": True,
+        "student": {
+            "id": student[0],
+            "name": student[1],
+            "email": student[2]
+        },
+        "counts": {
+            "pending": pending,
+            "approved": approved,
+            "rejected": rejected,
+            "total": total
+        }
+    })
+    
 # ================= INITIALIZE DATABASE =================
 
 init_db()
