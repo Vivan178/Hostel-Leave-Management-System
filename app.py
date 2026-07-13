@@ -1033,6 +1033,78 @@ def api_student_dashboard():
             "total": total
         }
     })
+@app.route("/api/student/leave_history", methods=["POST"])
+def api_student_leave_history():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    student_id = data.get("student_id")
+
+    if not student_id:
+        return jsonify({
+            "success": False,
+            "message": "Student ID is required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM students
+        WHERE id=?
+    """, (
+        student_id,
+    ))
+
+    student = cursor.fetchone()
+
+    if student is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Student account not found."
+        }), 404
+
+    cursor.execute("""
+        SELECT
+            id,
+            reason,
+            from_date,
+            to_date,
+            status
+        FROM leaves
+        WHERE student_id=?
+        ORDER BY id DESC
+    """, (
+        student_id,
+    ))
+
+    leaves = cursor.fetchall()
+    conn.close()
+
+    leave_history = []
+
+    for leave in leaves:
+        leave_history.append({
+            "id": leave[0],
+            "reason": leave[1],
+            "from_date": leave[2],
+            "to_date": leave[3],
+            "status": leave[4]
+        })
+
+    return jsonify({
+        "success": True,
+        "leaves": leave_history
+    })
     
 # ================= INITIALIZE DATABASE =================
 
