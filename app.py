@@ -1246,6 +1246,81 @@ def api_warden_login():
         "success": False,
         "message": "Invalid username or password."
     }), 401
+@app.route("/api/warden/leaves", methods=["POST"])
+def api_warden_leaves():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    warden_id = data.get("warden_id")
+
+    if not warden_id:
+        return jsonify({
+            "success": False,
+            "message": "Warden ID is required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM admins
+        WHERE id=?
+    """, (
+        warden_id,
+    ))
+
+    warden = cursor.fetchone()
+
+    if warden is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Warden account not found."
+        }), 404
+
+    cursor.execute("""
+        SELECT
+            leaves.id,
+            students.name,
+            students.email,
+            leaves.reason,
+            leaves.from_date,
+            leaves.to_date,
+            leaves.status
+        FROM leaves
+        JOIN students
+        ON leaves.student_id = students.id
+        ORDER BY leaves.id DESC
+    """)
+
+    leaves = cursor.fetchall()
+    conn.close()
+
+    leave_requests = []
+
+    for leave in leaves:
+        leave_requests.append({
+            "id": leave[0],
+            "student_name": leave[1],
+            "student_email": leave[2],
+            "reason": leave[3],
+            "from_date": leave[4],
+            "to_date": leave[5],
+            "status": leave[6]
+        })
+
+    return jsonify({
+        "success": True,
+        "leaves": leave_requests
+    })
     
 # ================= INITIALIZE DATABASE =================
 
