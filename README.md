@@ -271,17 +271,6 @@ flutter pub get
 flutter run
 ```
 
-## Default Development Login
-
-On first startup, the application creates a development warden account if one does not already exist:
-
-| Field | Value |
-|---|---|
-| Username | `warden` |
-| Password | `12345` |
-
-> This account is suitable only for demonstration. Change the credentials and implement password hashing before any real-world deployment.
-
 ## Database Design
 
 ### `students`
