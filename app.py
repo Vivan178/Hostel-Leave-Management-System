@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 import os
 import sqlite3
 import qrcode
@@ -821,6 +821,15 @@ def reject_leave(id):
 def admin_logout():
     session.clear()
     return redirect(url_for("warden_login"))
+
+# ================= MOBILE API =================
+
+@app.route("/api/test")
+def api_test():
+    return jsonify({
+        "success": True,
+        "message": "Hostel Leave Management API is working."
+    })
 
 
 # ================= INITIALIZE DATABASE =================
