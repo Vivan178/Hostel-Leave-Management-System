@@ -1,243 +1,370 @@
 <div align="center">
 
-# 🏨 Hostel Leave Management System
+# Hostel Leave Management System
 
-### A Flask-Based Web Application for Digital Hostel Leave Management
+### A Flask Web Platform with Flutter Mobile Support for Digital Hostel Leave Management
 
-[![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.1-black?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![PostgreSQL](https://img.shields.io/badge/Online%20Database-PostgreSQL-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![SQLite](https://img.shields.io/badge/Local%20Database-SQLite-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.1-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Production-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-Local-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?logo=render&logoColor=white)](https://render.com/)
-[![GitHub](https://img.shields.io/badge/Version%20Control-GitHub-181717?logo=github&logoColor=white)](https://github.com/)
+[![Render](https://img.shields.io/badge/Hosted_on-Render-46E3B7?logo=render&logoColor=white)](https://render.com/)
+[![Flutter](https://img.shields.io/badge/Mobile_Client-Flutter-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Windows](https://img.shields.io/badge/Desktop-Windows-0078D4?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 
-<br>
+[![Open Live Application](https://img.shields.io/badge/Open_Live_Application-Visit_Now-28A745?style=for-the-badge&logo=render&logoColor=white)](https://hostel-leave-management-system-w0nu.onrender.com)
 
-[![Open Live Website](https://img.shields.io/badge/Open%20Live%20Website-Visit%20Now-success?style=for-the-badge&logo=render)](https://hostel-leave-management-system-w0nu.onrender.com)
-
-*A complete digital solution for managing hostel leave requests efficiently and securely.*
+Developed by **Vivan Kumar**  
+BCA (Artificial Intelligence & Data Science), K.R. Mangalam University
 
 </div>
 
 ---
 
-## 📖 Project Overview
+## Overview
 
-The **Hostel Leave Management System** is a web-based application developed to digitize and simplify the hostel leave approval process.
+The **Hostel Leave Management System** digitizes the complete hostel leave workflow. Students can create accounts, submit leave applications, monitor their status, receive decision notifications, and download leave-history reports. Wardens use a separate dashboard to review applications and approve or reject them.
 
-Instead of maintaining paper-based leave records, students can register, log in and submit leave requests online. Wardens can access a separate dashboard to review, approve or reject those requests.
+The project provides:
 
-The application provides student and warden modules, session-based authentication, leave-status tracking, notifications, profile management and downloadable PDF leave reports.
+- a responsive browser-based interface;
+- a Windows desktop wrapper powered by PyWebView;
+- a Flutter mobile client that communicates with the backend JSON API;
+- automatic SQLite storage for local use; and
+- PostgreSQL support for deployment.
 
-The deployed application uses **PostgreSQL** for persistent data storage, while the local version automatically uses **SQLite**.
+> The Flask backend and desktop wrapper are present in this repository. The Flutter application is maintained as a separate client project and uses the mobile API described below.
 
----
+The system replaces slow, error-prone paper registers with a centralized and transparent process.
 
-## 🎯 Project Objectives
+## Key Objectives
 
-- Replace the traditional paper-based hostel leave process.
-- Allow students to submit and track leave requests online.
-- Provide wardens with a centralized leave-management dashboard.
-- Notify students when requests are approved or rejected.
-- Store deployed application data persistently using PostgreSQL.
-- Provide a responsive and user-friendly interface.
+- Make leave applications faster and easier for hostel students.
+- Give wardens a centralized view of all leave requests.
+- Keep students informed throughout the approval process.
+- Maintain searchable, persistent digital leave records.
+- Support local development and cloud deployment from the same codebase.
+- Provide a responsive interface across desktop and mobile screen sizes.
 
----
+## Features
 
-## ✨ Features
+### Student Module
 
-### 👨‍🎓 Student Module
+- Student registration with duplicate-email validation
+- Student login and session management
+- Dashboard with total, pending, approved, and rejected counts
+- Online leave application
+- Leave-history and status tracking
+- Decision notifications
+- Student profile view
+- Password change
+- Downloadable PDF leave report
+- Logout
 
-- Student registration
-- Secure student login
-- Personalized dashboard
-- Apply for hostel leave
-- View leave history
-- Track pending, approved and rejected requests
-- View notifications
-- View profile information
-- Change account password
-- Download PDF leave report
-- Secure logout
-
-### 👮 Warden Module
+### Warden Module
 
 - Separate warden login
-- Warden dashboard
-- View all student leave applications
-- View student names and email addresses
-- Approve leave requests
-- Reject leave requests
-- Automatically generate student notifications
-- Manage leave records
-- Secure warden logout
+- Central dashboard of student leave applications
+- Student name, email, reason, and leave-date visibility
+- Approve or reject leave requests
+- Automatic notification creation after a decision
+- Leave-record management
+- Logout
 
----
+### Additional Capabilities
 
-## 🛠️ Technology Stack
+- Flutter mobile workflow for students and wardens through the REST-style API
+- REST-style JSON endpoints for student and warden mobile workflows
+- PDF report generation with ReportLab
+- Local SQLite and hosted PostgreSQL database support
+- Windows desktop experience through PyWebView
+- Windows installer configuration through Inno Setup
+- Responsive Bootstrap interface
 
-### Frontend
+## System Workflow
 
-- HTML5
-- CSS3
-- Bootstrap 5.3
-- JavaScript
-- Font Awesome
-- Google Fonts
+```mermaid
+flowchart LR
+    S["Student registers or logs in"] --> A["Submits leave request"]
+    A --> D[("SQLite or PostgreSQL")]
+    D --> W["Warden reviews request"]
+    W --> C{"Decision"}
+    C -->|Approve| AP["Status: Approved"]
+    C -->|Reject| RJ["Status: Rejected"]
+    AP --> N["Student notification"]
+    RJ --> N
+    N --> H["Dashboard, history, and PDF report"]
+```
 
-### Backend
+## Architecture
 
-- Python
-- Flask
-- Gunicorn
+```mermaid
+flowchart TB
+    B["Web browser"] --> F["Flask application"]
+    P["Windows desktop wrapper"] --> F
+    M["Mobile client"] --> API["JSON API"]
+    API --> F
+    F --> T["Jinja templates and Bootstrap UI"]
+    F --> R["ReportLab PDF generator"]
+    F --> DB{"Database selection"}
+    DB -->|Local| S[("SQLite")]
+    DB -->|DATABASE_URL set| PG[("PostgreSQL")]
+```
 
-### Database
+## Technology Stack
 
-- PostgreSQL for the deployed application
-- SQLite for local development
-
-### Python Libraries
-
-- Flask
-- psycopg2-binary
-- ReportLab
-- Pillow
-- QRCode
-- python-dotenv
-
-### Development and Deployment
-
-- Visual Studio Code
-- Git
-- GitHub
-- Render
-
----
-
-## 📊 Project Information
-
-| Category | Details |
+| Layer | Technologies |
 |---|---|
-| Project Name | Hostel Leave Management System |
-| Application Type | Web Application |
-| Backend Framework | Flask |
-| Programming Language | Python |
-| Frontend | HTML, CSS, Bootstrap and JavaScript |
-| Online Database | PostgreSQL |
-| Local Database | SQLite |
-| Authentication | Session-based authentication |
-| PDF Generation | ReportLab |
-| Production Server | Gunicorn |
-| Deployment Platform | Render |
-| Version Control | Git and GitHub |
+| Frontend | HTML5, CSS3, Bootstrap 5.3, JavaScript, Font Awesome, Google Fonts |
+| Mobile client | Flutter and Dart |
+| Backend | Python, Flask, Gunicorn |
+| Local database | SQLite |
+| Production database | PostgreSQL with `psycopg2` |
+| Reporting | ReportLab |
+| Desktop wrapper | PyWebView |
+| Desktop packaging | PyInstaller and Inno Setup |
+| Deployment | Render |
+| Version control | Git and GitHub |
 
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Hostel-Leave-Management-System/
-│
-├── app.py
-├── hostel.db
-├── requirements.txt
-├── render.yaml
-├── README.md
-│
-├── screenshots/
-│   ├── home.png
-│   ├── student_login.png
-│   ├── student_register.png
-│   ├── student_dashboard.png
-│   ├── apply_leave.png
-│   ├── notifications.png
-│   ├── profile.png
-│   ├── change_password.png
-│   ├── warden_login.png
-│   ├── warden_dashboard.png
-│   └── approved_leave.png
-│
+├── app.py                                  # Main Flask app, database logic, and API
+├── launcher.py                             # PyWebView desktop launcher
+├── main.py                                 # Desktop application entry point
+├── splash.py                               # Desktop splash screen
+├── config.py                               # Project configuration
+├── requirements.txt                        # Python dependencies
+├── render.yaml                             # Render deployment configuration
+├── Hostel Leave Management System Installer.iss
+│                                             # Inno Setup installer script
+├── assets/                                 # Desktop icons and artwork
+├── screenshots/                            # Application screenshots
 ├── static/
-│   ├── css/
-│   ├── images/
-│   └── qr_codes/
-│
+│   └── css/
+│       └── style.css                       # Shared styling
 ├── templates/
-│   ├── student/
-│   ├── admin/
-│   └── home.html
-│
-└── reports/
+│   ├── admin/                              # Warden pages
+│   ├── student/                            # Student pages
+│   ├── base.html                           # Shared page layout
+│   └── home.html                           # Landing page
+├── models/                                 # Model package
+└── routes/                                 # Route package
 ```
 
----
+### Flutter Mobile Client
 
-## 🌐 Live Application
+The Flutter client is a separate project that consumes the Flask API. Its recommended structure is:
 
-The deployed version of the project is available at:
+```text
+flutter_app/
+├── lib/
+│   ├── main.dart                           # Application entry point
+│   ├── screens/                            # Login, dashboard, leave, and notification screens
+│   ├── services/                           # Backend API service
+│   ├── models/                             # Student, leave, and notification models
+│   └── widgets/                            # Reusable UI components
+├── assets/                                 # Images and app assets
+└── pubspec.yaml                            # Flutter dependencies and metadata
+```
 
-**https://hostel-leave-management-system-w0nu.onrender.com**
+Keep the Flutter project in its own repository or add it as a `flutter_app/` folder when publishing a combined source-code submission.
 
-> The Render free service may take a few moments to start after a period of inactivity.
+## Getting Started
 
----
+### Prerequisites
 
-## 🚀 Local Installation
+- Python 3.10 or later
+- `pip`
+- Git
+
+PostgreSQL is optional. Without a `DATABASE_URL`, the application automatically creates and uses a local `hostel.db` SQLite database.
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Vivan178/Hostel-Leave-Management-System.git
-```
-
-### 2. Open the Project Directory
-
-```bash
 cd Hostel-Leave-Management-System
 ```
 
-### 3. Create a Virtual Environment
+### 2. Create a Virtual Environment
 
-#### Windows
+Windows PowerShell:
 
 ```powershell
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-#### Linux or macOS
+Linux or macOS:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-### 4. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 5. Run the Application
+### 4. Configure the Environment
+
+For local SQLite use, only a secure Flask secret is recommended:
+
+Windows PowerShell:
+
+```powershell
+$env:SECRET_KEY="replace-with-a-long-random-value"
+```
+
+Linux or macOS:
+
+```bash
+export SECRET_KEY="replace-with-a-long-random-value"
+```
+
+For PostgreSQL, also provide its connection URL:
+
+```text
+DATABASE_URL=postgresql://username:password@host:5432/database_name
+```
+
+### 5. Run the Web Application
 
 ```bash
 python app.py
 ```
 
-### 6. Open the Local Website
+Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in a browser.
 
-```text
-http://127.0.0.1:5000
+### 6. Run the Desktop Wrapper (Optional)
+
+```bash
+python launcher.py
 ```
 
-When no `DATABASE_URL` environment variable is provided, the application automatically uses the local SQLite database.
+This starts the Flask server locally and opens it in a native desktop window.
 
----
+### 7. Connect the Flutter Application (Optional)
 
-## ☁️ Render Deployment Configuration
+In the Flutter project's API service, set the base URL to the deployed API:
 
-The application is deployed using the following Render configuration:
+```text
+https://hostel-leave-management-system-w0nu.onrender.com
+```
+
+For Android emulator development against a local Flask server, use:
+
+```text
+http://10.0.2.2:5000
+```
+
+For a physical phone, use the computer's local-network IP address and ensure the phone and computer are on the same network. Start the Flutter application from its own project folder with:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Default Development Login
+
+On first startup, the application creates a development warden account if one does not already exist:
+
+| Field | Value |
+|---|---|
+| Username | `warden` |
+| Password | `12345` |
+
+> This account is suitable only for demonstration. Change the credentials and implement password hashing before any real-world deployment.
+
+## Database Design
+
+### `students`
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique student identifier |
+| `name` | Student name |
+| `email` | Unique login email |
+| `password` | Student password |
+
+### `leaves`
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique leave-request identifier |
+| `student_id` | Student who submitted the request |
+| `reason` | Reason for leave |
+| `from_date` | Leave start date |
+| `to_date` | Leave end date |
+| `status` | `Pending`, `Approved`, or `Rejected` |
+
+### `admins`
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique warden identifier |
+| `username` | Warden login name |
+| `password` | Warden password |
+
+### `notifications`
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique notification identifier |
+| `student_id` | Notification recipient |
+| `message` | Decision message |
+| `status` | `Read` or `Unread` state |
+
+## Mobile API
+
+The Flask backend includes JSON endpoints for the Flutter mobile client. The client can support student login, leave submission, dashboard counts, leave history, notifications, warden login, request listing, and status updates.
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/api/test` | Check API availability |
+| `POST` | `/api/student/login` | Authenticate a student |
+| `POST` | `/api/student/apply_leave` | Submit a leave request |
+| `POST` | `/api/student/dashboard` | Retrieve student details and leave totals |
+| `POST` | `/api/student/leave_history` | Retrieve a student's leave history |
+| `POST` | `/api/student/notifications` | Retrieve status-based notifications |
+| `POST` | `/api/warden/login` | Authenticate a warden |
+| `POST` | `/api/warden/leaves` | Retrieve all leave requests |
+| `POST` | `/api/warden/update_leave_status` | Approve or reject a leave request |
+
+Example health check:
+
+```bash
+curl https://hostel-leave-management-system-w0nu.onrender.com/api/test
+```
+
+> The current mobile endpoints are intended for academic demonstration. Production use should add token-based authentication, authorization checks, request-rate limiting, and stricter input validation.
+
+## Flutter Client Workflow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Flutter App
+    participant A as Flask API
+    participant D as Database
+
+    U->>F: Signs in or submits a leave request
+    F->>A: Sends JSON request
+    A->>D: Reads or updates data
+    D-->>A: Returns stored data
+    A-->>F: Returns JSON response
+    F-->>U: Shows dashboard, history, or decision status
+```
+
+## Deployment on Render
+
+The included `render.yaml` defines the web service:
 
 ```yaml
 services:
@@ -248,257 +375,136 @@ services:
     startCommand: gunicorn app:app
 ```
 
-The deployed service uses the following environment variables:
+Set these environment variables in the Render dashboard:
 
-```text
-DATABASE_URL
-SECRET_KEY
-```
-
-`DATABASE_URL` connects the web application to PostgreSQL, while `SECRET_KEY` secures Flask sessions.
-
-> Database connection credentials must never be committed to GitHub.
-
----
-
-## 📸 Application Screenshots
-
-### 🏠 Home Page
-
-![Hostel Leave Management System Home Page](screenshots/home.png)
-
----
-
-### 👤 Student Login
-
-![Student Login Page](screenshots/student_login.png)
-
----
-
-### 📝 Student Registration
-
-![Student Registration Page](screenshots/student_register.png)
-
----
-
-### 📊 Student Dashboard
-
-![Student Dashboard](screenshots/student_dashboard.png)
-
----
-
-### 🗓️ Apply for Leave
-
-![Apply Leave Page](screenshots/apply_leave.png)
-
----
-
-### 🔔 Student Notifications
-
-![Student Notifications Page](screenshots/notifications.png)
-
----
-
-### 👤 Student Profile
-
-![Student Profile Page](screenshots/profile.png)
-
----
-
-### 🔑 Change Password
-
-![Change Password Page](screenshots/change_password.png)
-
----
-
-### 👮 Warden Login
-
-![Warden Login Page](screenshots/warden_login.png)
-
----
-
-### 📋 Warden Dashboard
-
-![Warden Dashboard](screenshots/warden_dashboard.png)
-
----
-
-### ✅ Approved Leave Request
-
-![Approved Leave Request](screenshots/approved_leave.png)
-
----
-
-## 🔄 Application Workflow
-
-```text
-Student Registration
-        ↓
-Student Login
-        ↓
-Submit Leave Request
-        ↓
-Request Stored in Database
-        ↓
-Warden Reviews Request
-        ↓
-Approve or Reject
-        ↓
-Student Receives Notification
-        ↓
-Updated Status Appears on Dashboard
-```
-
----
-
-## 🗄️ Database Tables
-
-### Students
-
-Stores student account information.
-
-| Field | Description |
+| Variable | Purpose |
 |---|---|
-| id | Unique student ID |
-| name | Student name |
-| email | Unique student email |
-| password | Student account password |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `SECRET_KEY` | Signs and protects Flask session data |
 
-### Leaves
+Never commit database credentials or production secrets to the repository.
 
-Stores student leave applications.
+## Screenshots
 
-| Field | Description |
+### Home Page
+
+![Home page](screenshots/home.png)
+
+### Student Login
+
+![Student login](screenshots/student_login.png)
+
+### Student Registration
+
+![Student registration](screenshots/student_register.png)
+
+### Student Dashboard
+
+![Student dashboard](screenshots/student_dashboard.png)
+
+### Apply for Leave
+
+![Apply for leave](screenshots/apply_leave.png)
+
+### Student Notifications
+
+![Student notifications](screenshots/notifications.png)
+
+### Student Profile
+
+![Student profile](screenshots/profile.png)
+
+### Change Password
+
+![Change password](screenshots/change_password.png)
+
+### Warden Login
+
+![Warden login](screenshots/warden_login.png)
+
+### Warden Dashboard
+
+![Warden dashboard](screenshots/warden_dashboard.png)
+
+### Approved Leave Request
+
+![Approved leave request](screenshots/approved_leave.png)
+
+## Testing Checklist
+
+| Test Area | Expected Result |
 |---|---|
-| id | Unique leave request ID |
-| student_id | ID of the student |
-| reason | Reason for leave |
-| from_date | Leave starting date |
-| to_date | Leave ending date |
-| status | Pending, Approved or Rejected |
+| Home page | Loads successfully |
+| Student registration | Creates a new student account |
+| Duplicate registration | Rejects an existing email address |
+| Student authentication | Accepts valid credentials and rejects invalid ones |
+| Leave submission | Stores a new request as `Pending` |
+| Student dashboard | Displays correct status totals and history |
+| Warden authentication | Opens the protected warden dashboard |
+| Approval and rejection | Updates the selected leave status |
+| Notifications | Shows the warden's decision to the student |
+| Password change | Updates the student's password after validation |
+| PDF report | Downloads the student's leave history |
+| Database selection | Uses SQLite locally and PostgreSQL when configured |
+| Responsive layout | Remains usable on common screen sizes |
 
-### Admins
+## Security Status
 
-Stores warden login information.
+This is an academic application. It uses parameterized database queries and protects browser dashboards with session checks. However, the current implementation stores passwords as plain text, provides a default development warden account, and identifies mobile users by database ID rather than an access token.
 
-| Field | Description |
-|---|---|
-| id | Unique admin ID |
-| username | Warden username |
-| password | Warden password |
+Before production use, the following changes are required:
 
-### Notifications
+- hash passwords with Werkzeug, Argon2, or bcrypt;
+- remove all default credentials;
+- require a strong `SECRET_KEY` with no insecure fallback;
+- add CSRF protection to state-changing browser actions;
+- use authenticated `POST` requests for approval and rejection;
+- add token-based mobile authentication and role authorization;
+- validate dates and all submitted fields server-side;
+- configure secure cookies, HTTPS enforcement, rate limiting, and audit logs; and
+- add database foreign keys, constraints, and migrations.
 
-Stores notifications generated after leave decisions.
+## Future Enhancements
 
-| Field | Description |
-|---|---|
-| id | Unique notification ID |
-| student_id | ID of the student |
-| message | Notification message |
-| status | Read or Unread |
-
----
-
-## 🔐 Access and Session Features
-
-- Separate student and warden login pages
-- Session-based login management
-- Protected student dashboard
-- Protected warden dashboard
-- Unique student email validation
-- Separate logout routes
-- Environment-based secret key
-- PostgreSQL credentials stored through environment variables
-
-> For a future production version, passwords should be stored using secure password hashing.
-
----
-
-## 🧪 Testing
-
-The application has been tested for the following operations:
-
-| Test Case | Result |
-|---|---|
-| Home page loading | Passed |
-| Student registration | Passed |
-| Duplicate email handling | Passed |
-| Student login | Passed |
-| Invalid student login handling | Passed |
-| Leave application submission | Passed |
-| Student dashboard statistics | Passed |
-| Warden login | Passed |
-| Leave request display | Passed |
-| Leave approval | Passed |
-| Leave rejection | Passed |
-| Student notification generation | Passed |
-| Password update | Passed |
-| PDF report generation | Passed |
-| PostgreSQL data persistence | Passed |
-| Responsive interface | Passed |
-| Render deployment | Passed |
-
----
-
-## 🚀 Future Enhancements
-
-- Secure password hashing
-- Email notifications
-- SMS notifications
-- Parent approval module
-- Multiple hostel support
-- Role-based administration
-- Warden analytics dashboard
-- Search and filtering options
-- Leave cancellation feature
-- Cloud-based document storage
-- Mobile application
-- Automated testing
-- Audit logs
+- Email and SMS notifications
+- Parent or guardian approval
+- Multiple-hostel support
+- Search, filtering, and pagination for wardens
+- Leave cancellation and modification
+- Supporting-document uploads
+- Analytics and downloadable administrative reports
+- QR-based gate verification
 - Two-factor authentication
+- Automated tests and continuous integration
+- Role-based administration and audit history
 
----
+## Developer
 
-## 👨‍💻 Developer
+**Vivan Kumar**  
+Bachelor of Computer Applications  
+Specialization: Artificial Intelligence & Data Science  
+K.R. Mangalam University
 
-**Vivan Kumar**
-
-🎓 Bachelor of Computer Applications  
-**Specialization:** Artificial Intelligence & Data Science
-
-🏫 K.R. Mangalam University
-
-💻 Python • Flask • PostgreSQL • SQLite • HTML • CSS • Bootstrap
-
----
-
-## 🙏 Acknowledgements
-
-Special thanks to:
+## Acknowledgements
 
 - K.R. Mangalam University
-- Flask community
+- Flask and Python communities
 - Bootstrap team
-- PostgreSQL community
-- SQLite community
-- Render
-- GitHub
+- PostgreSQL and SQLite communities
+- Render and GitHub
 
----
+## Academic Use
 
-## 📄 Academic Use
+This project was developed as an academic submission for the Bachelor of Computer Applications in Artificial Intelligence & Data Science program at K.R. Mangalam University.
 
-This project was developed as an academic project for the **Bachelor of Computer Applications in Artificial Intelligence & Data Science** program at **K.R. Mangalam University**.
-
-© 2026 Vivan Kumar. All Rights Reserved.
+© 2026 Vivan Kumar. All rights reserved.
 
 ---
 
 <div align="center">
 
-### ⭐ If you find this project useful, consider giving the repository a star!
+If this project is useful to you, consider giving the repository a star.
 
-Made with ❤️ using Python and Flask.
+Made with Python, Flask, and Bootstrap.
 
 </div>
