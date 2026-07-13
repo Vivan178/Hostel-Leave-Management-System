@@ -1197,6 +1197,55 @@ def api_student_notifications():
         "success": True,
         "notifications": notifications
     })
+@app.route("/api/warden/login", methods=["POST"])
+def api_warden_login():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    username = data.get("username", "").strip()
+    password = data.get("password", "").strip()
+
+    if not username or not password:
+        return jsonify({
+            "success": False,
+            "message": "Username and password are required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, username
+        FROM admins
+        WHERE username=?
+        AND password=?
+    """, (
+        username,
+        password
+    ))
+
+    admin = cursor.fetchone()
+    conn.close()
+
+    if admin:
+        return jsonify({
+            "success": True,
+            "warden": {
+                "id": admin[0],
+                "username": admin[1]
+            }
+        })
+
+    return jsonify({
+        "success": False,
+        "message": "Invalid username or password."
+    }), 401
     
 # ================= INITIALIZE DATABASE =================
 
