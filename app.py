@@ -881,7 +881,78 @@ def api_student_login():
         "success": False,
         "message": "Invalid email or password."
     }), 401
+@app.route("/api/student/apply_leave", methods=["POST"])
+def api_student_apply_leave():
 
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "success": False,
+            "message": "No data received."
+        }), 400
+
+    student_id = data.get("student_id")
+    reason = data.get("reason", "").strip()
+    from_date = data.get("from_date", "").strip()
+    to_date = data.get("to_date", "").strip()
+
+    if not student_id or not reason or not from_date or not to_date:
+        return jsonify({
+            "success": False,
+            "message": "All leave details are required."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM students
+        WHERE id=?
+    """, (
+        student_id,
+    ))
+
+    student = cursor.fetchone()
+
+    if student is None:
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Student account not found."
+        }), 404
+
+    try:
+        cursor.execute("""
+            INSERT INTO leaves
+            (student_id, reason, from_date, to_date, status)
+            VALUES(?, ?, ?, ?, ?)
+        """, (
+            student_id,
+            reason,
+            from_date,
+            to_date,
+            "Pending"
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({
+            "success": True,
+            "message": "Leave request submitted successfully."
+        }), 201
+
+    except Exception:
+        conn.rollback()
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message": "Unable to submit leave request."
+        }), 500
 # ================= INITIALIZE DATABASE =================
 
 init_db()
