@@ -419,6 +419,36 @@ Never commit database credentials or production secrets to the repository.
 
 ![Approved leave request](screenshots/approved_leave.png)
 
+## Flutter Emulator Screenshots
+
+### Flutter Home Page
+
+![Flutter home page](screenshots/flutter_home_page.png)
+
+### Flutter Student Login
+
+![Flutter student login](screenshots/flutter_student_login.png)
+
+### Flutter Student Dashboard
+
+![Flutter student dashboard](screenshots/flutter_student_dashboard.png)
+
+### Flutter Apply for Leave
+
+![Flutter apply for leave](screenshots/flutter_apply_leave.png)
+
+### Flutter Notifications
+
+![Flutter notifications](screenshots/flutter_notifications.png)
+
+### Flutter Warden Login
+
+![Flutter warden login](screenshots/flutter_warden_login.png)
+
+### Flutter Warden Dashboard
+
+![Flutter warden dashboard](screenshots/flutter_warden_dashboard.png)
+
 ## Testing Checklist
 
 | Test Area | Expected Result |
